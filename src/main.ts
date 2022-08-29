@@ -1,31 +1,18 @@
-import { dom, mount, Emitter } from "../lib/mycelia";
+import { dom, mount } from "../lib/mycelia";
+import { LinkListItemProps } from "./types";
+import { onLinkAdded, handleLinkAdded } from "./events";
 
-const emit = new Emitter();
+import linkList from "./links";
+import alertMsg from "./alert";
 
-const { div, ul, li, a, button } = dom;
-
-type LinkListItemProps = {
-  href: string;
-  text: string;
-};
+const { div, button } = dom;
 
 const addLink =
   ({ href, text }: LinkListItemProps) =>
   (e: MouseEvent) => {
     e.preventDefault();
-    emit.dispatch("link:added", { href, text });
+    handleLinkAdded({ href, text });
   };
-
-const linkListItem = ({ href, text }: LinkListItemProps) =>
-  li({ className: "link-list__item" }, a({ href }, text));
-
-const linkList = ul({ className: "link-list" }, [
-  linkListItem({ href: "https://google.com", text: "Google" }),
-  linkListItem({ href: "https://reddit.com", text: "Reddit" }),
-]);
-emit.add("link:added", ({ href, text }: LinkListItemProps) =>
-  linkList.appendChild(linkListItem({ href, text }))
-);
 
 const addLinkButton = button(
   {
@@ -34,6 +21,10 @@ const addLinkButton = button(
   "Add Soundcloud link"
 );
 
-const App = () => div({ className: "app-wrapper" }, [linkList, addLinkButton]);
+const App = div({ className: "app-wrapper" }, [linkList, addLinkButton]);
 
-mount(App(), "#app");
+onLinkAdded(({ text }: LinkListItemProps) => {
+  App.prepend(alertMsg(text));
+});
+
+mount(App, "#app");
