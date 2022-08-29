@@ -156,3 +156,7 @@ export const elementNames = [
 ] as const;
 
 export type ElementName = typeof elementNames[number];
+
+export type CreateElement = (
+  el: ElementName
+) => (props?: Props, children?: Children) => Element;
