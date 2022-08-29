@@ -1,8 +1,6 @@
-import { dom } from "../lib/mycelia";
+import { dom, mount } from "../lib/mycelia";
 
 const { div, ul, li, a } = dom;
-
-const app = document.getElementById("app");
 
 const linkClick = (e: MouseEvent) => {
   e.preventDefault();
@@ -16,6 +14,13 @@ const linkList = ul({ className: "link-list" }, [
   ),
 ]);
 
+const Variations = div({ className: "parent" }, [
+  div({ className: "child-div" }, "other div child"),
+  div("just text for this dude"),
+]);
+
 const ListOfLinks = div({ className: "list" }, linkList);
 
-app?.appendChild(ListOfLinks);
+const App = () => div({ className: "app-wrapper" }, [ListOfLinks, Variations]);
+
+mount(App(), "#app");
