@@ -1,3 +1,1 @@
-const mycelia = {};
-
-export default mycelia;
+export { dom } from "./dom";

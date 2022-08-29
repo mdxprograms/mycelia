@@ -1,8 +1,37 @@
-import { ElementName, Props } from "./types/DOM";
+import { ElementName, elementNames, Props, Children } from "./types/DOM";
 
-type DomElement = (props: Props) => Element;
+type CreateElement = (
+  el: ElementName
+) => (props?: Props, children?: Children) => Element;
 
-const create = (el: ElementName, props) =>
-  Object.assign(document.createElement(el), props);
+const createElement: CreateElement =
+  (el) =>
+  (...args) => {
+    const [props, children] = args;
 
-export const div: DomElement = (props): HTMLDivElement => create("div", props);
+    const parentEl = Object.assign(document.createElement(el), props ?? {});
+
+    if (props) {
+      if (typeof props === "string") {
+        parentEl.textContent = props;
+      }
+    }
+
+    if (children) {
+      if (Array.isArray(children)) {
+        children.forEach((child) => {
+          parentEl.appendChild(child);
+        });
+      } else if (typeof children === "string") {
+        parentEl.textContent = children;
+      } else {
+        parentEl.appendChild(children);
+      }
+    }
+
+    return parentEl;
+  };
+
+export const dom = Object.fromEntries(
+  elementNames.map((elName) => [elName, createElement(elName)])
+);

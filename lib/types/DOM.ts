@@ -1,4 +1,8 @@
-export type Props = { [k: string]: string | boolean };
+export type Children = Element | Element[] | Node | string | undefined;
+
+export type Props =
+  | Children
+  | { [k: string]: string | boolean | ((arg0: any) => any) };
 
 export const elementNames = [
   "a",
