@@ -1,26 +1,39 @@
-import { dom, mount } from "../lib/mycelia";
+import { dom, mount, Emitter } from "../lib/mycelia";
 
-const { div, ul, li, a } = dom;
+const emit = new Emitter();
 
-const linkClick = (e: MouseEvent) => {
-  e.preventDefault();
-  console.log("it work!");
+const { div, ul, li, a, button } = dom;
+
+type LinkListItemProps = {
+  href: string;
+  text: string;
 };
 
+const addLink =
+  ({ href, text }: LinkListItemProps) =>
+  (e: MouseEvent) => {
+    e.preventDefault();
+    emit.dispatch("link:added", { href, text });
+  };
+
+const linkListItem = ({ href, text }: LinkListItemProps) =>
+  li({ className: "link-list__item" }, a({ href }, text));
+
 const linkList = ul({ className: "link-list" }, [
-  li(
-    { className: "link-list__item" },
-    a({ href: "https://google.com", onclick: linkClick }, "Google")
-  ),
+  linkListItem({ href: "https://google.com", text: "Google" }),
+  linkListItem({ href: "https://reddit.com", text: "Reddit" }),
 ]);
+emit.add("link:added", ({ href, text }: LinkListItemProps) =>
+  linkList.appendChild(linkListItem({ href, text }))
+);
 
-const Variations = div({ className: "parent" }, [
-  div({ className: "child-div" }, "other div child"),
-  div("just text for this dude"),
-]);
+const addLinkButton = button(
+  {
+    onclick: addLink({ href: "https://soundcloud.com", text: "soundcloud" }),
+  },
+  "Add Soundcloud link"
+);
 
-const ListOfLinks = div({ className: "list" }, linkList);
-
-const App = () => div({ className: "app-wrapper" }, [ListOfLinks, Variations]);
+const App = () => div({ className: "app-wrapper" }, [linkList, addLinkButton]);
 
 mount(App(), "#app");
