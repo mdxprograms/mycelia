@@ -5,12 +5,20 @@ const emit = new Emitter();
 type Callback = (args: any) => void;
 
 export enum Events {
-  LinkAdded = "link:added",
+  TodoAdded = "todo:added",
+  TodoInputChanged = "todo:input-changed",
 }
 
-export const onLinkAdded = (cb: Callback) => {
-  emit.add(Events.LinkAdded, cb);
+export const onTodoAdded = (cb: Callback) => {
+  emit.add(Events.TodoAdded, cb);
 };
 
-export const handleLinkAdded = (data: any) =>
-  emit.dispatch(Events.LinkAdded, data);
+export const handleTodoAdded = (data: any) =>
+  emit.dispatch(Events.TodoAdded, data);
+
+export const onTodoInputChanged = (cb: Callback) => {
+  emit.add(Events.TodoInputChanged, cb);
+};
+
+export const handleTodoInputChanged = (data: any) =>
+  emit.dispatch(Events.TodoInputChanged, data);

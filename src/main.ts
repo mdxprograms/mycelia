@@ -1,30 +1,19 @@
 import { dom, mount } from "../lib/mycelia";
-import { LinkListItemProps } from "./types";
-import { onLinkAdded, handleLinkAdded } from "./events";
+import NewTodoInput from "./components/NewTodoInput";
+import NewTodoSubmitBtn from "./components/NewTodoSubmitButton";
+import Todos from "./components/Todos";
 
-import linkList from "./links";
-import alertMsg from "./alert";
+import { onTodoInputChanged } from "./events";
 
-const { div, button } = dom;
+const { div } = dom;
 
-const addLink =
-  ({ href, text }: LinkListItemProps) =>
-  (e: MouseEvent) => {
-    e.preventDefault();
-    handleLinkAdded({ href, text });
-  };
-
-const addLinkButton = button(
-  {
-    onclick: addLink({ href: "https://soundcloud.com", text: "soundcloud" }),
-  },
-  "Add Soundcloud link"
-);
-
-const App = div({ className: "app-wrapper" }, [linkList, addLinkButton]);
-
-onLinkAdded(({ text }: LinkListItemProps) => {
-  App.prepend(alertMsg(text));
+onTodoInputChanged((val) => {
+  console.log(val);
 });
+
+const App = div({ className: "app-wrapper" }, [
+  div({ className: "todo-form" }, [NewTodoInput, NewTodoSubmitBtn]),
+  Todos,
+]);
 
 mount(App, "#app");
