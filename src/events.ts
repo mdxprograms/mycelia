@@ -9,8 +9,8 @@ export enum Events {
 
 export const onTodoAdded = emit.on(Events.TodoAdded);
 
-export const handleTodoAdded = emit.dispatch(Events.TodoAdded);
-
 export const onTodoInputChanged = emit.on(Events.TodoInputChanged);
+
+export const handleTodoAdded = emit.dispatch(Events.TodoAdded);
 
 export const handleTodoInputChanged = emit.dispatch(Events.TodoInputChanged);

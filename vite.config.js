@@ -1,6 +1,6 @@
 // vite.config.js
 import { resolve } from "path";
-import { defineConfig } from "vite";
+import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
   build: {
@@ -9,6 +9,9 @@ export default defineConfig({
       name: "mycelia",
       // the proper extensions will be added
       fileName: "mycelia",
+    },
+    test: {
+      exclude: configDefaults.exclude,
     },
     rollupOptions: {
       output: {
