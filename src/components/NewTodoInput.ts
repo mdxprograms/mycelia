@@ -7,7 +7,7 @@ const { input } = dom;
 const NewTodoInput = input({
   className: "todo-input",
   onkeyup: (e: InputEvent) =>
-    handleTodoInputChanged((e?.target as HTMLInputElement)?.value),
+    handleTodoInputChanged({ title: (e?.target as HTMLInputElement)?.value }),
 }) as HTMLInputElement;
 
 onTodoAdded(() => {

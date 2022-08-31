@@ -6,8 +6,8 @@ const { div } = dom;
 
 const Todos = div({ className: "todos" }, []);
 
-onTodoAdded((val) => {
-  Todos.appendChild(Todo({ title: val }));
+onTodoAdded(({ title }) => {
+  Todos.appendChild(Todo({ title }));
 });
 
 export default Todos;

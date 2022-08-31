@@ -7,7 +7,7 @@ const { button } = dom;
 const NewTodoSubmitBtn = button(
   {
     className: "new-todo-submit",
-    onclick: () => handleTodoAdded(NewTodoInput.value),
+    onclick: () => handleTodoAdded({ title: NewTodoInput.value }),
   },
   "Add Todo"
 );
