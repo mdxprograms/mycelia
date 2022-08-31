@@ -30,27 +30,33 @@ export default class Emitter {
     );
   }
 
-  add(eventName: string, callback: Listener): void {
-    if (!this.isCallback(callback)) {
-      throw Error(`${typeof callback} must be a function`);
-    }
+  on(eventName: string) {
+    return (callback: Listener) => {
+      if (!this.isCallback(callback)) {
+        throw Error(`${typeof callback} must be a function`);
+      }
 
-    if (!this.isValidEventName(eventName)) {
-      throw Error("eventName must be a string");
-    }
+      if (!this.isValidEventName(eventName)) {
+        throw Error("eventName must be a string");
+      }
 
-    if (!this.hasEvent(eventName)) {
-      this.events[eventName] = [];
-    }
+      if (!this.hasEvent(eventName)) {
+        this.events[eventName] = [];
+      }
 
-    this.events[eventName].push(callback);
+      this.events[eventName].push(callback);
+    };
   }
 
-  dispatch(eventName: string, payload: Record<string, unknown>): void {
-    if (!this.hasEvent(eventName)) {
-      throw Error(`${eventName} is not a registered event`);
-    }
+  dispatch(eventName: string) {
+    return (payload: Record<string, unknown>) => {
+      if (!this.hasEvent(eventName)) {
+        throw Error(`${eventName} is not a registered event`);
+      }
 
-    this.events[eventName].forEach((listener: Listener) => listener(payload));
+      this.events[eventName].forEach((listener: Listener) => {
+        listener(payload);
+      });
+    };
   }
 }
