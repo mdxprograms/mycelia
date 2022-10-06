@@ -4,3 +4,11 @@
 export { dom } from "./dom";
 export { mount } from "./utils";
 export { default as Emitter } from "./emitter";
+export type {
+  CreateElement,
+  Children,
+  Props,
+  ElementName,
+  elementNames,
+} from "./types/DOM";
+export type { Mount } from "./types/Utils";
