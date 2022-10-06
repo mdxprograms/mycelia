@@ -3,6 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "./dist/mycelia.umd.cjs",
+  "module": "./dist/mycelia.js",
+  "exports": {
+    ".": {
+      "import": "./dist/mycelia.js",
+      "require": "./dist/mycelia.umd.cjs"
+    }
+  },
   "scripts": {
     "start": "vite --port 3000",
     "build": "tsc && vite build",
