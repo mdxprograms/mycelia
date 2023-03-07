@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "lib/mycelia.ts"),
-      name: "mycelia",
+      name: "@wallerbuilt/mycelia",
       fileName: "mycelia",
     },
     test: {

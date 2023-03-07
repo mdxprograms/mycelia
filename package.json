@@ -1,10 +1,17 @@
 {
-  "name": "mycelia",
-  "private": true,
+  "name": "@wallerbuilt/mycelia",
   "version": "0.0.0",
+  "description": "",
+  "license": "MIT",
+  "author": "Josh Waller",
   "type": "module",
   "main": "./dist/mycelia.umd.cjs",
+  "keywords": [],
   "module": "./dist/mycelia.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "import": "./dist/mycelia.js",
@@ -13,10 +20,12 @@
   },
   "scripts": {
     "start": "vite --port 3000",
-    "build": "tsc && vite build",
-    "test": "vitest",
+    "build": "rm -rf dist && tsc && vite build",
+    "test": "vitest run",
+    "watch": "vitest",
     "test:ui": "vitest --ui",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@types/node": "^18.7.13",
