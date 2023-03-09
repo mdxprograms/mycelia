@@ -48,6 +48,7 @@
     "splitting": false,
     "sourcemap": false,
     "clean": false,
-    "minify": false
+    "minify": false,
+    "minifySyntax": false
   }
 }
