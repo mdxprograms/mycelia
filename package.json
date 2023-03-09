@@ -1,6 +1,6 @@
 {
   "name": "@wallerbuilt/mycelia",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An minimal UI and event-driven javascript lib",
   "license": "MIT",
   "author": "Josh Waller",
