@@ -1,13 +1,18 @@
 {
   "name": "@wallerbuilt/mycelia",
-  "version": "0.0.0",
-  "description": "",
+  "version": "1.0.0",
+  "description": "An minimal UI and event-driven javascript lib",
   "license": "MIT",
   "author": "Josh Waller",
   "type": "module",
   "main": "./dist/mycelia.umd.cjs",
-  "keywords": [],
   "module": "./dist/mycelia.js",
+  "keywords": [
+    "javascript",
+    "dom",
+    "event driven",
+    "ui"
+  ],
   "files": [
     "dist",
     "README.md"
