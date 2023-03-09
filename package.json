@@ -31,7 +31,8 @@
     "watch": "vitest",
     "test:ui": "vitest --ui",
     "preview": "vite preview",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "publish": "npm publish --access public"
   },
   "devDependencies": {
     "@types/node": "^18.7.13",
