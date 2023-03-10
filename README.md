@@ -17,7 +17,7 @@ const appSelector = "#app"
 // abstracting the div and h1 element from dom object (could also use it as `dom.div` and `dom.h1`)
 const { div, h1 } = dom;
 
-const Heading = h1({ classname: 'intro-heading' }, "Hello mycelia!");'
+const Heading = h1({ classname: 'intro-heading' }, "Hello mycelia!");
 
 // Children are an array of mycelia elements or non-array strings
 const App = div({ classname: 'app-container' }, [Heading])
