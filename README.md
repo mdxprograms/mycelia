@@ -6,7 +6,13 @@ A minimal, DOM manipulation library with Javascript functions as elements and a 
 
 This is a continuation/improvement/evolution from [mantle](https://github.com/mdxprograms/mantle)
 
-## Example Usage
+## Installation
+
+```
+npm i -S @wallerbuilt/mycelia
+```
+
+## Usage
 
 ```typescript
 import { mount, dom } from "@wallerbuilt/mycelia";
@@ -25,3 +31,9 @@ const App = div({ classname: 'app-container' }, [Heading])
 // mount our App to appSelector element
 mount(App, appSelector);
 ```
+
+## Elements
+
+## Events and Dispatch
+
+## Examples
