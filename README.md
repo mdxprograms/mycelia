@@ -44,7 +44,7 @@ mount(App, appSelector);
 
 ## Events and Dispatch
 
-#### Emitter
+### Emitter
 Emitter is a class used as a central messaging system in a TypeScript or JavaScript application, allowing different parts of the application to communicate with each other using events and callbacks.
 
 Two was to approach this is either creating a new file defining your "store" and importing into each file that needs access. Or create the store and event functions within the main app file. It depends on the size of the application. Use separate store or event file for bigger applications or all in main file if it is a small footprint.
