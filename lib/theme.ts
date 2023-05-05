@@ -1,38 +1,15 @@
-type ThemeColor = {
-  dark: string;
-  light: string;
-  current: "dark" | "light";
-};
+import { ThemeColor, GlobalTheme, Theme } from "./types/Theme";
 
-type Global = ThemeColor & {
-  fontSize: number;
-};
-
-type Colors = {
-  color: ThemeColor;
-  background: ThemeColor;
-};
-
-const setColors = (
+export const setColors = (
   dark: ThemeColor["dark"],
   light: ThemeColor["light"],
   current: ThemeColor["current"]
 ): ThemeColor => ({ dark, light, current });
 
-const global = (props: Global): Global => ({ ...props });
-
-export type Theme = {
-  global: Global;
-  [x: string]:
-    | Global
-    | Colors
-    | string
-    | number
-    | { [x: string]: string | number };
-};
+export const globalTheme = (props: GlobalTheme): GlobalTheme => ({ ...props });
 
 export const defaultTheme: Theme = {
-  global: global({
+  global: globalTheme({
     fontSize: 16,
     dark: "#444",
     light: "#bbb",
