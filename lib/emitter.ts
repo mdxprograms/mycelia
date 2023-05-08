@@ -1,17 +1,17 @@
-type Listener = (args: any) => void;
+import { Listener, Listeners } from "./types/Emitter";
 
-export default class Emitter {
-  events: Record<string, Listener[]>;
+export default class Emitter<T> {
+  private listeners: Listeners<T>
 
   constructor() {
-    this.events = {};
+    this.listeners = {};
   }
 
   hasEvent(eventName: string) {
-    return Object.keys(this.events).includes(eventName);
+    return Object.keys(this.listeners).includes(eventName);
   }
 
-  isCallback(callback: Listener): boolean {
+  isCallback(callback: Listener<T>): boolean {
     return typeof callback === "function";
   }
 
@@ -19,19 +19,19 @@ export default class Emitter {
     return typeof eventName === "string";
   }
 
-  removeListener(eventName: string, callbackListener: Listener): void {
+  removeListener(eventName: string, callbackListener: Listener<T>): void {
     if (!this.hasEvent(eventName)) {
       throw Error(`${eventName} does not exist`);
     }
 
-    this.events[eventName] = this.events[eventName].filter(
-      (listener: Listener) =>
+    this.listeners[eventName] = this.listeners[eventName].filter(
+      (listener: Listener<T>) =>
         listener.toString() !== callbackListener.toString()
     );
   }
 
   on(eventName: string) {
-    return (callback: Listener) => {
+    return (callback: Listener<T>) => {
       if (!this.isCallback(callback)) {
         throw Error(`${typeof callback} must be a function`);
       }
@@ -41,22 +41,24 @@ export default class Emitter {
       }
 
       if (!this.hasEvent(eventName)) {
-        this.events[eventName] = [];
+        this.listeners[eventName] = [];
       }
 
-      this.events[eventName].push(callback);
+      this.listeners[eventName].push(callback);
     };
   }
 
   dispatch(eventName: string) {
-    return (payload: Record<string, unknown>) => {
+    return (payload: T) => {
       if (!this.hasEvent(eventName)) {
         throw Error(`${eventName} is not a registered event`);
       }
 
-      this.events[eventName].forEach((listener: Listener) => {
+      this.listeners[eventName].forEach((listener: Listener<T>) => {
         listener(payload);
       });
     };
   }
 }
+
+export type EmitterType = typeof Emitter

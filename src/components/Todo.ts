@@ -1,11 +1,8 @@
 import { dom } from "../../lib/mycelia";
+import { State } from "../events";
 
 const { div } = dom;
 
-export type TodoProps = {
-  title: string;
-};
-
-const Todo = ({ title }: TodoProps) => div({ className: "todo" }, title);
+const Todo = ({ title }: State) => div({ className: "todo" }, title);
 
 export default Todo;

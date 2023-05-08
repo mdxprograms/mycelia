@@ -1,6 +1,8 @@
 import { Emitter } from "../lib/mycelia";
 
-const emit = new Emitter();
+export type State = { title?: string; hasError?: boolean; msg?: string; }
+
+const emit = new Emitter<State>();
 
 export enum Events {
   TodoAdded = "todo:added",

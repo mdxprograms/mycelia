@@ -12,3 +12,5 @@ export type {
   elementNames,
 } from "./types/DOM";
 export type { Mount } from "./types/Utils";
+export type { EmitterType } from "./emitter";
+export type { Listener, Listeners } from "./types/Emitter";

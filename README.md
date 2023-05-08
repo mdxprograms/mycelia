@@ -12,7 +12,7 @@ This is a continuation/improvement/evolution from [mantle](https://github.com/md
 npm i -S @wallerbuilt/mycelia
 ```
 
-## Usage
+## Basic Usage
 
 ```typescript
 import { mount, dom } from "@wallerbuilt/mycelia";
@@ -34,6 +34,49 @@ mount(App, appSelector);
 
 ## Elements
 
+Elements are created from the `dom` object.
+
+```typescript
+import { dom } from "@wallerbuilt/mycelia";
+
+const { div, button, p } = dom;
+
+const Item = div({ className: "item" }, [
+	p("I have some interesting things to say in this item's paragraph."),
+	button({ onclick: console.log }, "Click me!")
+]);
+```
+
+## Mount
+
+`mount` is the jumping off point of your application and typically takes the outermost element as an argument.
+
+```typescript
+import { mount, dom } from "@wallerbuilt/mycelia";
+
+const appSelector = "#app";
+
+const App = dom.div("the app here")
+
+mount(App, appSelector);
+```
+
 ## Events and Dispatch
 
-## Examples
+```typescript
+import { Emitter } from "@wallerbuilt/mycelia";
+
+type State = {
+  todos: string[];
+}
+
+const emit = new Emitter<State>(); // the generic is then passed to `on` and `dispatch` on instantiation
+```
+
+When using `emit.on` or `emit.dispatch`, your payload returned and sent (respectively), requires that type of state object to be passed.
+
+```typescript
+emit.on("event:name")(({ todos }) => console.log(todos));
+
+emit.dispatch("event:name")({ todos: ["one added"] });
+```
