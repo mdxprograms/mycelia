@@ -35,14 +35,14 @@ onTodoAdded(() => {
   NewTodoInput.value = "";
 });
 
-onTodoInputChanged(({ title }: { title: string }) => {
+onTodoInputChanged(({ title = "" }) => {
   if (title.length > 3) {
     ErrorMsg.textContent = "";
   }
 });
 
-onTodoInputErrored((error: { hasError: boolean; msg: string }) => {
-  ErrorMsg.textContent = error.msg;
+onTodoInputErrored(({ msg = "" }) => {
+  ErrorMsg.textContent = msg;
 });
 
 export default NewTodoInput;

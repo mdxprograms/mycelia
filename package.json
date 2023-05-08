@@ -41,6 +41,7 @@
   "devDependencies": {
     "@types/node": "^18.7.13",
     "@vitest/ui": "^0.22.1",
+    "c8": "^7.13.0",
     "happy-dom": "^6.0.4",
     "semantic-release": "^20.1.1",
     "tsup": "^6.7.0",

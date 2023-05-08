@@ -1,8 +1,7 @@
 import { describe, it, expect } from "vitest";
 import Emitter from "./emitter";
 
-const emit = new Emitter();
-
+const emit = new Emitter<{ name: string }>();
 const NameSent = "name:sent";
 
 describe("emitter tests", () => {
@@ -10,7 +9,7 @@ describe("emitter tests", () => {
     const onNameSent = emit.on(NameSent);
     const handleNameSent = emit.dispatch(NameSent);
 
-    onNameSent(({ name }: { name: string }) => {
+    onNameSent(({ name }) => {
       expect(name).toBe("John");
     });
 
